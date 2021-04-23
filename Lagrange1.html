@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        
+        <title>Exported from https://cindyjs.org/editor/</title>
+        <style type="text/css">
+            body {
+                margin: 0px;
+                padding: 0px;
+            }
+            
+            #CSCanvas {
+                width: 100vw; height: 100vh;
+            }
+        </style>
+        <link rel="stylesheet" href="https://cindyjs.org/dist/latest/CindyJS.css">
+        <script type="text/javascript" src="https://cindyjs.org/dist/latest/Cindy.js"></script>
+        <script type="text/javascript" src="https://cindyjs.org/dist/latest/CindyGL.js"></script>
+        
+      
+
+       <script id="csinit" type="text/x-cindyscript">
+    resetclock();
+    imageready("phoenix");
+     arrow(aa,bb):=(
+                ii=complex((0,1));
+                   a1=complex(aa);
+                   b1=complex(bb);
+                   draw(gauss(a1),gauss(b1),color->(0,0,0.6));
+                   draw(gauss(b1-((b1-a1)/8)*exp(ii*.4) ),gauss(b1),color->(0,0,0.6));
+                   draw(gauss(b1-((b1-a1)/8)*exp(-ii*.4) ),gauss(b1),color->(0,0,0.6));
+                   );
+       
+        l=[];
+        ll=[];
+              
+        O=[0,0];
+        
+
+        A=[0,1];
+        draw(A);
+
+        </script>
+
+
+ <script id='csmove' type='text/x-cindyscript'>
+         pts=[P1.xy,P2.xy,P3.xy,P4.xy,P5.xy];
+
+            xs=apply(pts,p,p_1);
+            ys=apply(pts,p,p_2);
+            n=length(pts);
+            //ts=1..n;
+
+            l(j,x):=product(1..n--[j],m, (x-xs_m)/(xs_j-xs_m) );
+
+            L(x):=sum(1..n,j,ys_j*l(j,x));
+
+            xmin=min(xs);
+            xmax=max(xs);
+
+
+            plot((x,L(x)),start->xmin,stop->xmax,size->2,steps->200);
+
+            /*
+            f(t,k):=product(1..n--[k],j,t-ts_j); 
+            px(t,i):=f(t,i)/f(ts_i,i)*xs_i;
+            py(t,i):=f(t,i)/f(ts_i,i)*ys_i;
+
+            px(t):=sum(1..n,r,px(t,r));
+            py(t):=sum(1..n,i,py(t,i));
+            
+            plot((px(t),py(t)),start->1, stop->n,steps->100,size->4,color->(.9,0,0));
+            */
+       
+      
+        </script>
+
+      <script id="csdraw" type="text/x-cindyscript">
+        
+        </script>
+ 
+    <script id="cstick" type="text/x-cindyscript">
+       
+    </script>
+
+    
+        <script type="text/javascript">
+          var cdy = CindyJS({
+            scripts: "cs*",
+            angleUnit: "°",
+            exclusive: false,
+            images: {phoenix:"phoenix.png"},
+            geometry: [
+                 {name:"P1", type:"Free", pos:[1,0],color:[1,.5,.5]},
+                 {name:"P2", type:"Free", pos:[2,0],color:[1,.5,.5]},
+                 {name:"P3", type:"Free", pos:[3,0],color:[1,.5,.5]},
+                 {name:"P4", type:"Free", pos:[4,0],color:[1,.5,.5]},
+                 {name:"P5", type:"Free", pos:[4.3,0],color:[1,.5,.5]},
+            ],
+            ports: [
+              {id: "CSCanvas", transform: [{visibleRect: [0, -5, 10, 5]}], background: "rgb(168,176,192)"}
+            ],
+            csconsole: false,
+            use: [
+              "CindyGL"
+            ],
+            autoplay: true,
+            behavior: [
+
+            ]
+          });
+        </script>
+    </head>
+    <body>
+        <div id="CSCanvas"></div>
+          <button onclick="cdy.play()" type="button">Play</button>
+        <button onclick="cdy.pause()" type="button">Pause</button>
+        <button onclick="cdy.stop()" type="button">Stop</button>
+
+    </body>
+    </html>
+  

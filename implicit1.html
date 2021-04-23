@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+    <title>Cindy JS</title>
+    <link rel="stylesheet" href="https://cindyjs.org/dist/latest/CindyJS.css">
+        <script type="text/javascript" src="https://cindyjs.org/dist/latest/Cindy.js"></script>
+        <script type="text/javascript" src="https://cindyjs.org/dist/latest/CindyGL.js"></script>
+  </head>
+
+	<body style="font-family:Arial;">
+
+    <script id="csinit" type="text/x-cindyscript">
+      use("CindyGL");
+      resetclock();
+      play();
+    </script>
+
+
+    <script id="csdraw" type="text/x-cindyscript">
+
+      s=0.5*seconds();
+      C=[-8+s,-5];
+      draw(C);
+      //print(C);
+			//fun(x,y):=y^9-1.4*x^2*y^2+1.4*x^3;
+			//fun(x,y):=x^4-y^2;
+			fun(x,y):=x^2;
+
+      //colorplot(min(|fun(x,y) + 0.5 + 10*exp(-s)*random()|,1));
+			colorplot( min(fun(x,y)^6,1) );
+			// sign=1;
+			// colorplot(
+			// 	newsign=if(fun(x,y)>0,1,-1);
+			// 	print(x);
+			// 	if(newsign == sign , 1 , (sign=newsign; 0;) );
+			// );
+    </script>
+
+    <div  id="CSCanvas" style="width:600px; height:600px; border:2px solid #000000"></div>
+
+    <script type="text/javascript">
+
+        var gslp=[];
+        var cdy = CindyJS({canvasname:"CSCanvas",
+                    scripts: "cs*",
+                    geometry:gslp
+                  });
+    </script>
+
+     <body>
+        <div id="CSCanvas"></div>
+          <button onclick="cdy.play()" type="button">Play</button>
+        <button onclick="cdy.pause()" type="button">Pause</button>
+        <button onclick="cdy.stop()" type="button">Stop</button>
+
+    </body>
+	</body>
+</html>

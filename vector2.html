@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        
+        <title>Exported from https://cindyjs.org/editor/</title>
+        <style type="text/css">
+            body {
+                margin: 0px;
+                padding: 0px;
+            }
+            
+            #CSCanvas {
+                width: 100vw; height: 100vh;
+            }
+        </style>
+        <link rel="stylesheet" href="https://cindyjs.org/dist/latest/CindyJS.css">
+        <script type="text/javascript" src="https://cindyjs.org/dist/latest/Cindy.js"></script>
+        <script type="text/javascript" src="https://cindyjs.org/dist/latest/CindyGL.js"></script>
+        
+      
+
+       <script id="csinit" type="text/x-cindyscript">
+    resetclock();
+    imageready("phoenix");
+     arrow(aa,bb):=(
+                ii=complex((0,1));
+                   a1=complex(aa);
+                   b1=complex(bb);
+                   draw(gauss(a1),gauss(b1),color->(0,0,0.6));
+                   draw(gauss(b1-((b1-a1)/8)*exp(ii*.4) ),gauss(b1),color->(0,0,0.6));
+                   draw(gauss(b1-((b1-a1)/8)*exp(-ii*.4) ),gauss(b1),color->(0,0,0.6));
+                   );
+       
+        l=[];
+        ll=[];
+              
+        O=[0,0];
+        
+
+        A=[0,1];
+        draw(A);
+
+        </script>
+
+
+ <script id='csmove' type='text/x-cindyscript'>
+        
+       
+      
+        </script>
+
+      <script id="csdraw" type="text/x-cindyscript">
+        v=P-O;
+        A = A+v/100;
+        
+        l=l++[A.xy];
+        ll=ll++[A.xy];
+        if(length(l)>180,l=apply(2..length(l),l_#));
+
+        connect(ll,color->(1,0.5,0.5),size->2);
+
+        damp=.99;
+        al=damp^(length(l));
+        forall(1..length(l),
+           draw(l_#,alpha->al,color->(1,.5,.5),size->7*al);
+        al=al/damp);
+
+        draw(O);
+        arrow(O,P);
+       
+        draw (A);
+        arrow(A,A+v);
+        drawimage(A,"phoenix",scale->0.01,angle->-arctan2(v));
+
+
+        </script>
+ 
+    <script id="cstick" type="text/x-cindyscript">
+       
+    </script>
+
+    
+        <script type="text/javascript">
+          var cdy = CindyJS({
+            scripts: "cs*",
+            angleUnit: "°",
+            exclusive: false,
+            images: {phoenix:"phoenix.png"},
+            geometry: [
+                 {name:"P", type:"Free", pos:[1,0],color:[1,.5,.5]},
+
+            ],
+            ports: [
+              {id: "CSCanvas", transform: [{visibleRect: [-5, -5, 5, 5]}], background: "rgb(168,176,192)"}
+            ],
+            csconsole: false,
+            use: [
+              "CindyGL"
+            ],
+            autoplay: true,
+            behavior: [
+
+            ]
+          });
+        </script>
+    </head>
+    <body>
+        <div id="CSCanvas"></div>
+          <button onclick="cdy.play()" type="button">Play</button>
+        <button onclick="cdy.pause()" type="button">Pause</button>
+        <button onclick="cdy.stop()" type="button">Stop</button>
+
+    </body>
+    </html>
+  
